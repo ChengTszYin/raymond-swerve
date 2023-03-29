@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot name="mybot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<gazebo reference="S4_wheel_link">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="S3_wheel_link">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="S2_wheel_link">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="S1_wheel_link">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+     <robotNamespace>/mybot</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="swerve_drive_controller" filename="libgazebo_ros_p3d.so">
+    <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <gaussianNoise>0.01</gaussianNoise>
+      <bodyName>base_footprint</bodyName>
+      <topicName>odomw</topicName>
+    </plugin>
+  </plugin>
+</gazebo>
+</robot>

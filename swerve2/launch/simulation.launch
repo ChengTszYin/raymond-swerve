@@ -1,0 +1,17 @@
+<launch>
+	<param name="robot_description" textfile="$(find urdfAssm2)/urdf/urdfAssm2.urdf.xacro" />   
+	
+	
+	<param name="use_gui" value="true"/>  
+	
+	
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	
+	
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	
+	
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdfAssm2)/rviz/urdfAssm2.rviz" required="true" />
+	
+</launch>
+

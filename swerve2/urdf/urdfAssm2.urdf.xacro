@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="mybot" xmlns:xacro="http://ros.org/wiki/xacro"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+ >
+
+<xacro:include filename="$(find swerve)/urdf/urdfAssm2.gazebo.xacro" />
+<xacro:include filename="$(find swerve)/urdf/macros.xacro" />
+<xacro:property name="PI" value="3.1415926535897931"/>
+<xacro:property name="wheelrad" value="0.07"/>
+<xacro:property name="wheeleng" value="0.05"/>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.016740350844899 0.0307423784997515 -0.0323146494975246"
+        rpy="0 0 0" />
+      <mass
+        value="1.83813014538573" />
+      <inertia
+        ixx="0.0126527136163981"
+        ixy="-2.08028592840101E-05"
+        ixz="1.89181976316372E-08"
+        iyy="0.0214525871748862"
+        iyz="-0.000346791397246124"
+        izz="0.0108801705210895" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="swer1">
+    <inertial>
+      <origin
+        xyz="0.00112932650883885 -0.0163068625808451 -0.00309777579378279"
+        rpy="0 0 0" />
+      <mass
+        value="0.781511757095579" />
+      <inertia
+        ixx="0.000843060389202077"
+        ixy="1.39670594351371E-05"
+        ixz="-7.58494977239166E-06"
+        iyy="0.000817015924616437"
+        iyz="-3.73146040650031E-05"
+        izz="0.000859803598059485" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rejo1"
+    type="continuous">
+    <origin
+      xyz="0.26 -0.26 0"
+      rpy="-1.5707963267949 0 -1.93881529154163" />
+    <parent
+      link="base_link" />
+    <child
+      link="swer1" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+<transmission name="S1_rerans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="rejo1">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S1_revotor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+  <link
+    name="swer2">
+    <inertial>
+      <origin
+        xyz="0.00112932650883885 -0.0163068625808454 -0.00309777579378301"
+        rpy="0 0 0" />
+      <mass
+        value="0.78151175709558" />
+      <inertia
+        ixx="0.000843060389202078"
+        ixy="1.39670594351372E-05"
+        ixz="-7.58494977239191E-06"
+        iyy="0.000817015924616439"
+        iyz="-3.73146040650027E-05"
+        izz="0.000859803598059486" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rejo2"
+    type="continuous">
+    <origin
+      xyz="-0.26 -0.26 0"
+      rpy="-1.5707963267949 0 1.20389866029615" />
+    <parent
+      link="base_link" />
+    <child
+      link="swer2" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+<transmission name="S2_rerans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="rejo2">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S2_revotor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+  <link
+    name="swer3">
+    <inertial>
+      <origin
+        xyz="0.00112932650883912 -0.0163068625808453 -0.00309777579378304"
+        rpy="0 0 0" />
+      <mass
+        value="0.78151175709558" />
+      <inertia
+        ixx="0.000843060389202078"
+        ixy="1.39670594351371E-05"
+        ixz="-7.58494977239294E-06"
+        iyy="0.000817015924616437"
+        iyz="-3.73146040650033E-05"
+        izz="0.000859803598059485" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rejo3"
+    type="continuous">
+    <origin
+      xyz="0.26 0.26 0"
+      rpy="-1.5707963267949 0 -1.93226228110303" />
+    <parent
+      link="base_link" />
+    <child
+      link="swer3" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+<transmission name="S3_rerans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="rejo3">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S3_revotor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+  <link
+    name="swer4">
+    <inertial>
+      <origin
+        xyz="0.00112932650883907 -0.0163068625808454 -0.00309777579378329"
+        rpy="0 0 0" />
+      <mass
+        value="0.78151175709558" />
+      <inertia
+        ixx="0.000843060389202079"
+        ixy="1.3967059435137E-05"
+        ixz="-7.58494977239397E-06"
+        iyy="0.000817015924616437"
+        iyz="-3.73146040650027E-05"
+        izz="0.000859803598059483" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdfAssm2/meshes/swer4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rejo4"
+    type="continuous">
+    <origin
+      xyz="-0.26 0.26 0"
+      rpy="-1.5707963267949 0 1.21649767020403" />
+    <parent
+      link="base_link" />
+    <child
+      link="swer4" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+<transmission name="S4_rerans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="rejo4">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S4_revotor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+#####
+ <link name="S1_wheel_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <mass value="5"/>
+    <cylinder_inertia m="5" r="${wheelrad}" h="${wheeleng}"/>
+  </inertial>
+</link>
+
+<joint name="S1_wheel_joint" type="continuous">     
+        <origin xyz="0 0 0" rpy="1.5707 0 0"/>      
+        <parent link="swer1"/>          
+        <child link="S1_wheel_link"/>    
+        <axis xyz="0 1 0"/>
+	<limit effort="100" velocity="100"/>
+	<joint_properties damping="0.0" friction="0.0"/>     
+    </joint>
+
+<transmission name="S1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="S1_wheel_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S1_Motor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+<link name="S2_wheel_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <mass value="5"/>
+    <cylinder_inertia m="5" r="${wheelrad}" h="${wheeleng}"/>
+  </inertial>
+</link>
+
+<joint name="S2_wheel_joint" type="continuous">     
+        <origin xyz="0 0 0" rpy="1.5707 0 0"/>      
+        <parent link="swer2"/>          
+        <child link="S2_wheel_link"/>    
+        <axis xyz="0 1 0"/>
+	<limit effort="100" velocity="100"/>
+	<joint_properties damping="0.0" friction="0.0"/>     
+    </joint>
+
+<transmission name="S2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="S2_wheel_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S2_Motor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+
+<link name="S3_wheel_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <mass value="5"/>
+    <cylinder_inertia m="5" r="${wheelrad}" h="${wheeleng}"/>
+  </inertial>
+</link>
+
+<joint name="S3_wheel_joint" type="continuous">     
+        <origin xyz="0 0 0" rpy="1.5707 0 0"/>      
+        <parent link="swer3"/>          
+        <child link="S3_wheel_link"/>    
+        <axis xyz="0 1 0"/>
+	<limit effort="100" velocity="100"/>
+	<joint_properties damping="0.0" friction="0.0"/>     
+    </joint>
+
+<transmission name="S3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="S3_wheel_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S3_Motor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+
+<link name="S4_wheel_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <geometry>
+      <cylinder length="${wheeleng}" radius="${wheelrad}"/>
+    </geometry>
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+    <mass value="5"/>
+    <cylinder_inertia m="5" r="${wheelrad}" h="${wheeleng}"/>
+  </inertial>
+</link>
+
+<joint name="S4_wheel_joint" type="continuous">     
+        <origin xyz="0 0 0" rpy="1.5707 0 0"/>      
+        <parent link="swer4"/>          
+        <child link="S4_wheel_link"/>    
+        <axis xyz="0 1 0"/>
+	<limit effort="100" velocity="100"/>
+	<joint_properties damping="0.0" friction="0.0"/>     
+    </joint>
+
+<transmission name="S4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="S4_wheel_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="S4_Motor">
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+</robot>
